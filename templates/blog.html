@@ -1,0 +1,204 @@
+{% extends 'index.html' %}
+{% load static %}
+
+  <!--== End Header Wrapper ==-->
+  {% block content %}
+  <main class="main-content">
+    <!--== Start Page Header Area Wrapper ==-->
+    <div class="page-header-area sec-overlay sec-overlay-black" data-bg-img="assets/img/photos/bg2.jpg">
+      <div class="container pt--0 pb--0">
+        <div class="col-12">
+          <div class="job-search-wrap">
+            <div class="job-search-form">
+              <form action="" method="get">
+                <div class="row row-gutter-10">
+                  <div class="col-lg-auto col-sm-6 col-12 flex-grow-1">
+                    <div class="form-group">
+                      <!-- <input type="text" class="form-control" placeholder="Makalanyň ady"> -->
+                      {{myfilter.form.title}}
+                    </div>
+                  </div>
+                  <div class="col-lg-auto col-sm-6 col-12 flex-grow-1">
+                    {{myfilter.form.tagList}}
+                    <!-- <div class="form-group">
+                      <select class="form-control">
+                        <option value="1">Kategoriya</option>
+                        <option value="2">New York</option>
+                        <option value="3">California</option>
+                        <option value="4">Illinois</option>
+                        <option value="5">Texas</option>
+                        <option value="6">Florida</option>
+                      </select>
+                    </div> -->
+                  </div>
+                  <!-- <div class="col-lg-auto col-sm-6 col-12 flex-grow-1">
+                    <div class="form-group">
+                      <select class="form-control">
+                        <option value="1" selected>Goşmaça</option>
+                        <option value="2">Has gyzgyn makalalar</option>
+                        <option value="4">Köp like alanlar</option>
+                        <option value="5">Köp paýlaşylanlar</option>
+                      </select>
+                    </div>
+                  </div> -->
+                  <div class="col-lg-auto col-sm-6 col-12 flex-grow-1">
+                    <div class="form-group">
+                      <button type="submit" class="btn-form-search"><i
+                          class="icofont-search-1"></i></button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="row">
+          <div class="col-12">
+            <div class="page-header-content">
+              <h2 class="title">Blog Post</h2>
+              <nav class="breadcrumb-area">
+                <ul class="breadcrumb justify-content-center">
+                  <li><a href="index.html">Home</a></li>
+                  <li class="breadcrumb-sep">//</li>
+                  <li>Blog Post</li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div> -->
+      </div>
+    </div>
+    
+    <!--== End Page Header Area Wrapper ==-->
+
+    <!--== Start Blog Area Wrapper ==-->
+    <section class="blog-area blog-grid-area">
+      <div class="container">
+        <div class="row justify-content-between flex-xl-row-reverse">
+          <div class="col-xl-8">
+            <div class="row row-gutter-70">
+              {% for post in posts %}
+              <div class="col-sm-6 col-lg-4 col-xl-6">
+                <!--== Start Blog Post Item ==-->
+                <div class="post-item">
+                  <div class="thumb">
+                    <a href="{% url 'post-detail' post.id %}"><img src="{{post.image.url}}" alt="Image" width="370" height="270"></a>
+                  </div>
+                  <div class="content">
+                    <div class="author"><span class="post-date">{{post.createdAt|date:"D d M Y"}}</span></div>
+                    <h4 class="title"><a href="{% url 'post-detail' post.id %}">{{post.title}}</a></h4>
+                    <p>{{post.text|striptags|truncatechars:40}}</p>
+                    <div class="meta">
+                      <span class="post-time"><i class="icofont-like" style="color: green;"></i> {{post.likes}}</span>
+                      <span class="post-time"><i class="icofont-share" style="color: green;"></i> {{post.share}}</span>
+                      <span class="post-time"><i class="icofont-eye" style="color: green;"> </i> {{post.seens}}</span>
+                    </div>
+                  </div>
+                </div>
+                <!--== End Blog Post Item ==-->
+              </div>
+              {% endfor %}
+              <div class="col-12 text-left">
+                <div class="pagination-area">
+                  <nav>
+                    <ul class="page-numbers d-inline-flex">
+                      <li>
+                        <a class="page-number active" href="blog.html">1</a>
+                      </li>
+                      <li>
+                        <a class="page-number" href="blog.html">2</a>
+                      </li>
+                      <li>
+                        <a class="page-number" href="blog.html">3</a>
+                      </li>
+                      <li>
+                        <a class="page-number" href="blog.html">4</a>
+                      </li>
+                      <li>
+                        <a class="page-number next" href="blog.html">
+                          <i class="icofont-long-arrow-right"></i>
+                        </a>
+                      </li>
+                    </ul>
+                  </nav>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-4">
+            <div class="blog-sidebar blog-sidebar-left">
+              <!-- <div class="widget-item">
+                <div class="widget-body">
+                  <div class="widget-search-box">
+                    <form action="#" method="post">
+                      <div class="form-input-item">
+                        <input type="search" id="search2" placeholder="Search here">
+                        <button type="submit" class="btn-src">
+                          <i class="icofont-search"></i>
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div> -->
+              <div class="widget-item">
+                <div class="widget-title">
+                  <h3 class="title">Post Category</h3>
+                </div>
+                <div class="widget-body">
+                  <div class="widget-categories">
+                    <ul>
+                      <li><a href="job.html">Commercial Movers<span>(16)</span></a></li>
+                      <li><a href="job.html">Air Freight Services<span>(03)</span></a></li>
+                      <li><a href="job.html">Drone Services<span>(08)</span></a></li>
+                      <li><a href="job.html">Road Freight<span>(18)</span></a></li>
+                      <li><a href="job.html">Warehousing<span>(02)</span></a></li>
+                      <li><a href="job.html">Consulting Storage<span>(14)</span></a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="widget-item">
+                <div class="widget-title">
+                  <h3 class="title">Recent Post</h3>
+                </div>
+                <div class="widget-body">
+                  <div class="widget-post">
+                    {% for recent in recent_posts %}
+                    <div class="widget-blog-post">
+                      <div class="thumb">
+                        <a href="{% url 'post-detail' recent.id %}"><img src="{{recent.image.url}}" alt="Image" width="71" height="70"></a>
+                      </div>
+                      <div class="content">
+                        <h4><a href="{% url 'post-detail' recent.id %}">{{recent.title|truncatechars:16}}</a></h4>
+                        <div class="meta">
+                          <span class="post-date"><i class="icofont-ui-calendar"></i>{{recent.createdAt|date:"D d M Y"}}</span>
+                        </div>
+                      </div>
+                    </div>
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="widget-item mb-md-0">
+                <div class="widget-title">
+                  <h3 class="title">Popular Tags</h3>
+                </div>
+                <div class="widget-body">
+                  <div class="widget-tags">
+                    <ul>
+                      {% for tag in tagList %}
+                      <li><a href="job.html">{{tag.title}}</a></li>
+                      {% endfor %}
+                    </ul>
+                  </div>
+                </div>
+              </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--== End Blog Area Wrapper ==-->
+  </main>
+  {% endblock %}

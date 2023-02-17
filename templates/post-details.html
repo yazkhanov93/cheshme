@@ -1,0 +1,192 @@
+{% extends "index.html" %}
+{% load static %}
+{% block content %}
+{% load social_share %}
+
+<main class="main-content">
+  <!--== Start Page Header Area Wrapper ==-->
+  <div class="page-header-area sec-overlay sec-overlay-black" data-bg-img="assets/img/photos/bg2.jpg">
+    <div class="container pt--0 pb--0">
+      <div class="row">
+        <div class="col-12">
+          <div class="page-header-content">
+            <h4 class="title">{{post_detail.title}}</h4>
+            <nav class="breadcrumb-area">
+              <ul class="breadcrumb justify-content-center">
+                <li><i class="icofont-calendar" style="color:aliceblue;"> {{post_detail.createdAt}}</i></li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--== End Page Header Area Wrapper ==-->
+  <!--== Start Blog Area Wrapper ==-->
+  <section class="blog-details-area">
+    <div class="post-details-item">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-12">
+            <div class="post-details-thumb">
+              <img class="w-100" src="{{post_detail.image.url}}" alt="Image" width="1100" height="250">
+            </div>
+          </div>
+          <div class="col-lg-10">
+            <div class="post-details-content">
+              {{post_detail.text|safe}}
+              <div class="post-details-footer">
+                <div class="widget-social-icons">
+                  <span>Baha beriň, Paýlaşyň</span>
+                  <div class="social-icons">
+                    <a href="{% url 'post-like' post_detail.id %}" rel="noopener"><i class="icofont-like"></i>
+                      {{post_detail.likes}}</a>
+                    <a rel="noopener" id="share"><i class="icofont-share"></i> {{post_detail.share}}</a>
+                    <a rel="noopener"><i class="icofont-eye"></i> {{post_detail.seens}}</a>
+                  </div>
+                  <!-- The Modal -->
+                  <div id="myModal" class="modal">
+                    <!-- Modal content -->
+                    <div class="modal-content">
+                      <span class="close">&times;</span>
+                      <form method="POST" class="form-group">
+                        {% csrf_token %}
+                        <input type="email" placeholder="email" name="email">
+                        <input type="submit" class="btn btn-outline-success" value="Paýlaş">
+                      </form>
+                    </div>
+                  </div>
+                  <style>
+                    /* The Modal (background) */
+                    .modal {
+                      display: none;
+                      /* Hidden by default */
+                      position: fixed;
+                      /* Stay in place */
+                      z-index: 1;
+                      /* Sit on top */
+                      padding-top: 100px;
+                      /* Location of the box */
+                      left: 0;
+                      top: 0;
+                      width: 100%;
+                      /* Full width */
+                      height: 100%;
+                      /* Full height */
+                      overflow: auto;
+                      /* Enable scroll if needed */
+                      background-color: rgb(0, 0, 0);
+                      /* Fallback color */
+                      background-color: rgba(0, 0, 0, 0.4);
+                      /* Black w/ opacity */
+                    }
+
+                    /* Modal Content */
+                    .modal-content {
+                      display: block;
+                      background-color: #fefefe;
+                      margin: auto;
+                      padding: 20px;
+                      border: 1px solid #888;
+                      width: 40%;
+                    }
+
+                    .modal-content form{
+                      display: grid;
+                      grid-template-columns: repeat(2, auto);
+                      max-width: 80%;
+                      grid-gap: 3px;
+                    }
+                    /* The Close Button */
+                    .close {
+                      color: #aaaaaa;
+                      float: right;
+                      font-size: 28px;
+                      font-weight: bold;
+                    }
+
+                    .close:hover,
+                    .close:focus {
+                      color: #000;
+                      text-decoration: none;
+                      cursor: pointer;
+                    }
+                  </style>
+                  <script>
+                    var modal = document.getElementById("myModal");
+                    var btn = document.getElementById("share");
+                    var span = document.getElementsByClassName("close")[0];
+                    btn.onclick = function () {
+                      modal.style.display = "block";
+                    }
+                    span.onclick = function () {
+                      modal.style.display = "none";
+                    }
+                    window.onclick = function (event) {
+                      if (event.target == modal) {
+                        modal.style.display = "none";
+                      }
+                    }
+                  </script>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="related-posts-area related-post-area bg-color-gray">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="post-title-wrap">
+              <h4 class="title">Sizi gyzyklandyryp biljek makalarar</h4>
+              <!--== Add Swiper Arrows ==-->
+              <div class="swiper-btn-wrap">
+                <div class="related-post-swiper-btn-prev">
+                  <i class="icofont-long-arrow-left"></i>
+                </div>
+                <div class="related-post-swiper-btn-next">
+                  <i class="icofont-long-arrow-right"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="related-posts">
+              <div class="swiper related-post-slider-container">
+                <div class="swiper-wrapper related-post-slider">
+                  {% for i in posts %}
+                  <div class="swiper-slide">
+                    <!--== Start Blog Post Item ==-->
+                    <div class="post-item2">
+                      <div class="thumb">
+                        <a href="">
+                          <img src="{{i.image.url}}" alt="Image" style="width:350px; height:250px;">
+                        </a>
+                      </div>
+                      <div class="content">
+                        <h4 class="title"><a href="{% url 'post-detail' i.id %}">{{i.title|truncatechars:20}}</a></h4>
+                        <div class="meta">
+                          <span class="post-date">{{i.createdAt}}</span>
+                          <!-- <span class="dots"></span> -->
+                        </div>
+                      </div>
+                    </div>
+                    <!--== End Blog Post Item ==-->
+                  </div>
+                  {% endfor %}
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--== End Blog Area Wrapper ==-->
+</main>
+{% endblock %}
