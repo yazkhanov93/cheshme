@@ -6,7 +6,7 @@ from django_filters.filters import CharFilter, forms, MultipleChoiceFilter, Choi
 class PostFilter(django_filters.FilterSet):
     title = CharFilter(widget=forms.TextInput(attrs={
                        "class": "form-control", "placeholder": "ady"}), field_name="title", lookup_expr="icontains")
-    tagList = ModelChoiceFilter(field_name="tagList", empty_label="Taglar", queryset=Tag.objects.all(), widget=forms.Select(
+    category = ModelChoiceFilter(field_name="category", empty_label="Kategoriýa", queryset=Category.objects.all(), widget=forms.Select(
         attrs={"class": "form-control"}))
 
     # tagList = ModelMultipleChoiceFilter(field_name="tagList", queryset=Tag.objects.all(

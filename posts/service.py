@@ -1,14 +1,16 @@
 from .models import *
 from django.forms import ModelForm
+from django.contrib.auth.models import User
 
 
 def seenAdd(userId, postId):
     post = Post.objects.get(id=postId)
-    user = UserId.objects.get(title=userId)
-    if post.seen.filter(title=user).exists():
-        pass
-    else:
-        post.seen.add(user)
+    user = User.objects.filter(username=userId)
+    print(user.id)
+    # if post.seen.filter(user_id=user.id).exists():
+    #     pass
+    # else:
+    #     post.seen.add(user)
 
 
 def relatedPosts(postId):

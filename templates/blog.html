@@ -19,7 +19,7 @@
                     </div>
                   </div>
                   <div class="col-lg-auto col-sm-6 col-12 flex-grow-1">
-                    {{myfilter.form.tagList}}
+                    {{myfilter.form.category}}
                     <!-- <div class="form-group">
                       <select class="form-control">
                         <option value="1">Kategoriya</option>
@@ -143,17 +143,14 @@
               </div> -->
               <div class="widget-item">
                 <div class="widget-title">
-                  <h3 class="title">Post Category</h3>
+                  <h3 class="title">Post Categories</h3>
                 </div>
                 <div class="widget-body">
                   <div class="widget-categories">
                     <ul>
-                      <li><a href="job.html">Commercial Movers<span>(16)</span></a></li>
-                      <li><a href="job.html">Air Freight Services<span>(03)</span></a></li>
-                      <li><a href="job.html">Drone Services<span>(08)</span></a></li>
-                      <li><a href="job.html">Road Freight<span>(18)</span></a></li>
-                      <li><a href="job.html">Warehousing<span>(02)</span></a></li>
-                      <li><a href="job.html">Consulting Storage<span>(14)</span></a></li>
+                      {% for category in categories %}
+                      <li><a href="">{{category.title}}<span></span></a></li>
+                      {% endfor %}
                     </ul>
                   </div>
                 </div>
