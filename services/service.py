@@ -24,29 +24,27 @@ def categoryList():
     return categories
 
 
-def signUp(ip_addr):
+def signUp(userId):
     try:
-        userName = netaddr.IPAddress(ip_addr)
         user = User.objects.create(
-            username=userName.value,
-            password=make_password(str(userName.value))
+            username=userId,
+            password=make_password(userId)
         )
         user.save()
     except:
         pass
 
-def seenAdd(ip_addr, pk):
+def seenAdd(userId, pk):
     post = Post.objects.get(id=pk)
-    username = netaddr.IPAddress(ip_addr)
-    user = User.objects.get(username=username.value)
+    user = User.objects.get(username=userId)
     if post.seen.filter(username=user).exists():
         pass
     else:
         post.seen.add(user)
 
-def addIntereset(ip_addr, pk):
+def addIntereset(userId, pk):
     post = Post.objects.get(id=pk)
-    user = User.objects.get(username=netaddr.IPAddress(ip_addr).value)
+    user = User.objects.get(username=userId)
     interest = UserInterests.objects.filter(user=user)
     try:
         interest=UserInterests.objects.create(
@@ -63,8 +61,8 @@ def addIntereset(ip_addr, pk):
     finally:
         pass
     
-def postList(ip_addr):
-    user = User.objects.get(username=netaddr.IPAddress(ip_addr).value)
+def postList(userId):
+    user = User.objects.get(username=userId)
     interests = UserInterests.objects.filter(user=user)
     interestList = []
     for i in interests:

@@ -69,15 +69,15 @@
                   </ul>
                 </div>
               </div>
-              <!-- <div class="header-align-end">
+              <div class="header-align-end">
                 <div class="header-action-area">
-                  <a class="btn-registration" href="registration.html"><span>+</span> Agza bol</a>
+                  <!-- <a class="btn-registration" href="registration.html"><span>+</span> Agza bol</a> -->
                   <button class="btn-menu" type="button" data-bs-toggle="offcanvas" data-bs-target="#AsideOffcanvasMenu"
                     aria-controls="AsideOffcanvasMenu">
                     <i class="icofont-navigation-menu"></i>
                   </button>
                 </div>
-              </div> -->
+              </div>
             </div>
           </div>
         </div>
@@ -273,6 +273,12 @@
           </div>
         </div>
       </section>
+      <script>
+        const uuid = "{{uuid}}";
+        if (uuid !== ""){
+          document.cookie = "userId=" + uuid;
+        }
+      </script>
       <!--== End Recent Job Area Wrapper ==-->
       {% endblock %}
     </main>
@@ -437,37 +443,10 @@
         <!-- Mobile Menu Start -->
         <div class="mobile-menu-items">
           <ul class="nav-menu">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="#">Find Jobs</a>
-              <ul class="sub-menu">
-                <li><a href="job.html">Jobs</a></li>
-                <li><a href="job-details.html">Job Details</a></li>
-              </ul>
-            </li>
-            <li><a href="employers-details.html">Employers Details</a></li>
-            <li><a href="#">Candidates</a>
-              <ul class="sub-menu">
-                <li><a href="candidate.html">Candidates</a></li>
-                <li><a href="candidate-details.html">Candidate Details</a></li>
-              </ul>
-            </li>
-            <li><a href="#">Blog</a>
-              <ul class="sub-menu">
-                <li><a href="blog-grid.html">Blog Grid</a></li>
-                <li><a href="blog.html">Blog Left Sidebar</a></li>
-                <li><a href="blog-right-sidebar.html">Blog Right Sidebar</a></li>
-                <li><a href="blog-details.html">Blog Details</a></li>
-              </ul>
-            </li>
-            <li><a href="#">Pages</a>
-              <ul class="sub-menu">
-                <li><a href="about-us.html">About us</a></li>
-                <li><a href="login.html">Login</a></li>
-                <li><a href="registration.html">Registration</a></li>
-                <li><a href="page-not-found.html">Page Not Found</a></li>
-              </ul>
-            </li>
-            <li><a href="contact.html">Contact</a></li>
+            <li><a href="index.html">Baş sahypa</a></li>
+            <li><a href="#">Makalalar</a></li>
+            <li><a href="employers-details.html">Biz barada</a></li>
+            <li><a href="#">Habarlaşmak üçin</a></li>
           </ul>
         </div>
         <!-- Mobile Menu End -->
@@ -475,6 +454,7 @@
     </aside>
     <!--== End Aside Menu ==-->
   </div>
+
 
   <!--=======================Javascript============================-->
 

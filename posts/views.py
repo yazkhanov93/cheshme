@@ -6,44 +6,57 @@ from services.service import *
 from .filters import PostFilter
 from django.contrib.auth.models import User
 import netaddr
+import uuid
 
 
 def index(request):
-    ip_addr = request.META["REMOTE_ADDR"]
-    signUp(ip_addr)
+    userId = request.COOKIES.get("userId")
+    if userId:
+        pass
+    else:
+        userId = str(uuid.uuid1())
+    signUp(userId)
     post = Post.objects.all().order_by("-createdAt")
     myfilter = PostFilter(request.GET, queryset=post)
     post = myfilter.qs
     hottestPosts = Post.objects.all()
-    context = {"posts":post, "hottestPosts":hottestPosts, "myfilter":myfilter}
+    context = {"posts":post, "hottestPosts":hottestPosts, "myfilter":myfilter, "uuid":userId}
     return render(request, "index.html", context)
 
 
+def postsByCategory(request, pk):
+    posts = Post.objects.filter(category__title=pk)
+    category = Category.objects.all().only("id","title")
+    recent_posts = Post.objects.all().only("id","title","image","createdAt").order_by("-createdAt")[:4]
+    context = {"posts":posts, "recent_post":recent_posts, "categories":category}
+    return render(request, "category.html", context)
+
+
 def posts(request):
-    ip_addr = request.META["REMOTE_ADDR"]
+    userId = request.COOKIES.get("userId")
     posts = Post.objects.all().order_by("-createdAt")
-    post = posts.filter(category__in=postList(ip_addr))
+    post = posts.filter(category__in=postList(userId))
     myfilter = PostFilter(request.GET, queryset=posts)
     post = myfilter.qs
-    resent_posts = Post.objects.all().order_by("-createdAt")[:4]
-    context = {"posts":post, "myfilter":myfilter, "recent_posts":resent_posts, "tagList":tagList(), "categories":categoryList()}
+    recent_posts = Post.objects.all().only("id","title","image","createdAt").order_by("-createdAt")[:4]
+    context = {"posts":post, "myfilter":myfilter, "recent_posts":recent_posts, "tagList":tagList(), "categories":categoryList()}
     return render(request, "blog.html", context)
 
 
 def postDetail(request, pk):
-    ip_addr = request.META["REMOTE_ADDR"]
+    userId = request.COOKIES.get("userId")
     post_detail = Post.objects.get(id=pk)
-    seenAdd(ip_addr, pk)
-    addIntereset(ip_addr, pk)
+    seenAdd(userId, pk)
+    addIntereset(userId, pk)
     posts = relatedPosts(pk)
     context = {"post_detail":post_detail, "posts":posts}
     return render(request, "post-details.html", context)
 
 
 def likePost(request, pk):
-    ip_addr = request.META["REMOTE_ADDR"]
+    userId = request.COOKIES.get("userId")
     post = Post.objects.get(id=pk)
-    user = User.objects.get(username=netaddr.IPAddress(ip_addr).value)
+    user = User.objects.get(username=userId)
     if post.like.filter(username=user).exists():
         post.like.remove(user)
     else:

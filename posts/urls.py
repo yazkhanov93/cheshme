@@ -7,4 +7,5 @@ urlpatterns = [
     path("post-detail/<int:pk>/", views.postDetail, name="post-detail"),
     path("post-like/<int:pk>/", views.likePost, name="post-like"),
     path("blog-list/", views.posts, name="blog-list"),
+    path("category-list/<str:pk>/", views.postsByCategory, name="category-list"),
 ]

@@ -10,45 +10,16 @@
         <div class="col-12">
           <div class="job-search-wrap">
             <div class="job-search-form">
-              <form action="" method="get">
-                <div class="row row-gutter-10">
-                  <div class="col-lg-auto col-sm-6 col-12 flex-grow-1">
-                    <div class="form-group">
-                      <!-- <input type="text" class="form-control" placeholder="Makalanyň ady"> -->
-                      {{myfilter.form.title}}
-                    </div>
-                  </div>
-                  <div class="col-lg-auto col-sm-6 col-12 flex-grow-1">
-                    {{myfilter.form.category}}
-                    <!-- <div class="form-group">
-                      <select class="form-control">
-                        <option value="1">Kategoriya</option>
-                        <option value="2">New York</option>
-                        <option value="3">California</option>
-                        <option value="4">Illinois</option>
-                        <option value="5">Texas</option>
-                        <option value="6">Florida</option>
-                      </select>
-                    </div> -->
-                  </div>
-                  <!-- <div class="col-lg-auto col-sm-6 col-12 flex-grow-1">
-                    <div class="form-group">
-                      <select class="form-control">
-                        <option value="1" selected>Goşmaça</option>
-                        <option value="2">Has gyzgyn makalalar</option>
-                        <option value="4">Köp like alanlar</option>
-                        <option value="5">Köp paýlaşylanlar</option>
-                      </select>
-                    </div>
-                  </div> -->
-                  <div class="col-lg-auto col-sm-6 col-12 flex-grow-1">
-                    <div class="form-group">
-                      <button type="submit" class="btn-form-search"><i
-                          class="icofont-search-1"></i></button>
-                    </div>
-                  </div>
+              <div class="col-12">
+                <div class="slider-content">
+                  <h2 class="title" style="color: antiquewhite;"><span class="counter" data-counterup-delay="80">{{posts.count}}</span> gyzykly
+                    makalalar
+                    <br>
+                  </h2>
+                  <p class="desc">
+                  </p>
                 </div>
-              </form>
+              </div>  
             </div>
           </div>
         </div>
@@ -149,7 +120,7 @@
                   <div class="widget-categories">
                     <ul>
                       {% for category in categories %}
-                      <li><a href="{% url 'category-list' category.title %}">{{category.title}}<span></span></a></li>
+                      <li><a href="">{{category.title}}<span></span></a></li>
                       {% endfor %}
                     </ul>
                   </div>
@@ -161,7 +132,7 @@
                 </div>
                 <div class="widget-body">
                   <div class="widget-post">
-                    {% for recent in recent_posts %}
+                    {% for recent in recent_post %}
                     <div class="widget-blog-post">
                       <div class="thumb">
                         <a href="{% url 'post-detail' recent.id %}"><img src="{{recent.image.url}}" alt="Image" width="71" height="70"></a>
@@ -176,21 +147,7 @@
                     {% endfor %}
                   </div>
                 </div>
-              </div>
-              <!-- <div class="widget-item mb-md-0">
-                <div class="widget-title">
-                  <h3 class="title">Popular Tags</h3>
-                </div>
-                <div class="widget-body">
-                  <div class="widget-tags">
-                    <ul>
-                      {% for tag in tagList %}
-                      <li><a href="job.html">{{tag.title}}</a></li>
-                      {% endfor %}
-                    </ul>
-                  </div>
-                </div>
-              </div> -->
+              </div>              
             </div>
           </div>
         </div>

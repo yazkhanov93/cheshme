@@ -17,3 +17,4 @@ class Meta:
     model = Post
     fields = ["title", "tagList"]
     exclude = ["image", "like", "seen", "share"]
+
