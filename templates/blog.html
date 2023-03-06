@@ -103,21 +103,24 @@
                   <nav>
                     <ul class="page-numbers d-inline-flex">
                       <li>
-                        <a class="page-number active" href="blog.html">1</a>
+                        {% if posts.has_previous %}
+                        <a class="page-number next" href="?page={{ posts.previous_page_number }}"><i class="icofont-long-arrow-left"></i></a>
+                        {% endif %}
                       </li>
                       <li>
-                        <a class="page-number" href="blog.html">2</a>
+                        <a class="page-number active" href="">{{ posts.number }}</a>
                       </li>
+                      {% if posts.number != posts.next_page_number %}
                       <li>
-                        <a class="page-number" href="blog.html">3</a>
+                        <a class="page-number" href="">{{posts.paginator.num_pages}}</a>
                       </li>
+                      {% endif %}
                       <li>
-                        <a class="page-number" href="blog.html">4</a>
-                      </li>
-                      <li>
-                        <a class="page-number next" href="blog.html">
+                        {% if posts.has_next %}
+                        <a class="page-number next" href="?page={{ posts.next_page_number }}">
                           <i class="icofont-long-arrow-right"></i>
                         </a>
+                        {% endif %}
                       </li>
                     </ul>
                   </nav>

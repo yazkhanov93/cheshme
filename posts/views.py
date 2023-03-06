@@ -7,6 +7,7 @@ from .filters import PostFilter
 from django.contrib.auth.models import User
 import netaddr
 import uuid
+from django.core.paginator import Paginator
 
 
 def index(request):
@@ -37,9 +38,11 @@ def posts(request):
     posts = Post.objects.all().order_by("-createdAt")
     post = posts.filter(category__in=postList(userId))
     myfilter = PostFilter(request.GET, queryset=posts)
-    post = myfilter.qs
+    paginator = Paginator(myfilter.qs, 3)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
     recent_posts = Post.objects.all().only("id","title","image","createdAt").order_by("-createdAt")[:4]
-    context = {"posts":post, "myfilter":myfilter, "recent_posts":recent_posts, "tagList":tagList(), "categories":categoryList()}
+    context = {"posts":page_obj, "myfilter":myfilter, "recent_posts":recent_posts, "tagList":tagList(), "categories":categoryList()}
     return render(request, "blog.html", context)
 
 

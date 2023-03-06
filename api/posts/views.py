@@ -10,8 +10,8 @@ from django.contrib.auth.models import User
 
 class HomePageView(APIView):
     def get(self, request):
-        ip_addr = request.META["REMOTE_ADDR"]
-        signUp(ip_addr)
+        # ip_addr = request.META["REMOTE_ADDR"]
+        # signUp(ip_addr)
         posts = Post.objects.all().order_by("-createdAt")
         hotPosts = Post.objects.all()
         postSerializer = PostSerializer(posts, many=True)
