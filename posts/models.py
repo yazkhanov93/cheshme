@@ -19,7 +19,7 @@ class Category(models.Model):
 
 class UserInterests(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="user")
-    category = models.OneToOneField(Category, on_delete=models.CASCADE, verbose_name="category")
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name="category")
     count = models.IntegerField(verbose_name="sany")
 
     class Meta:

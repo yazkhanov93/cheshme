@@ -5,7 +5,6 @@ from .models import *
 from services.service import *
 from .filters import PostFilter
 from django.contrib.auth.models import User
-import netaddr
 import uuid
 from django.core.paginator import Paginator
 

@@ -46,20 +46,32 @@ def addIntereset(userId, pk):
     post = Post.objects.get(id=pk)
     user = User.objects.get(username=userId)
     interest = UserInterests.objects.filter(user=user)
-    try:
-        interest=UserInterests.objects.create(
-            user=user,
-            category=post.category,
-            count=1
-            )
-        interest.save()
-    except:
+    if len(interest) > 0:
         for i in interest:
-            if i.category == post.category:
-                i.count +=1
+            if i.user.username == userId and i.category == post.category:
+                i.count = i.count + 1
                 i.save()
-    finally:
-        pass
+            else:
+                interest=UserInterests.objects.create(
+                    user=user,
+                    category=post.category,
+                    count=1
+                    )
+                interest.save()
+    else:
+        interest=UserInterests.objects.create(
+                    user=user,
+                    category=post.category,
+                    count=1
+                    )
+        interest.save()
+    # except:
+    #     for i in interest:
+    #         if i.category == post.category:
+    #             i.count +=1
+    #             i.save()
+    # finally:
+    #     pass
     
 def postList(userId):
     user = User.objects.get(username=userId)
